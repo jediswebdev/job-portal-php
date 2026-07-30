@@ -30,20 +30,20 @@
       <ul
         class="font-medium flex flex-col p-4 md:p-0 mt-4 rounded-xl bg-indigo-700 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-indigo-700 text-center">
         <li>
-          <a href="#" class="block py-2 px-3 text-white rounded md:p-0 hover:bg-gray-500"
+          <a href="#" class="block py-2 px-3 text-white rounded hover:bg-gray-500"
             aria-current="page">Home</a>
         </li>
         <li>
           <a href="/job-portal/about.php"
-            class="block py-2 px-3 text-white rounded md:p-0 hover:bg-gray-500">About</a>
+            class="block py-2 px-3 text-white rounded hover:bg-gray-500">About</a>
         </li>
         <li>
           <a href="#"
-            class="block py-2 px-3 text-white rounded md:p-0 hover:bg-gray-500">Services</a>
+            class="block py-2 px-3 text-white rounded hover:bg-gray-500">Services</a>
         </li>
         <li>
           <a href="#"
-            class="block py-2 px-3 text-white rounded md:p-0 hover:bg-gray-500">Contact</a>
+            class="block py-2 px-3 text-white rounded hover:bg-gray-500">Contact</a>
         </li>
       </ul>
 

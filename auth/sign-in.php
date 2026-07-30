@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
-<body class="bg-[url('../components/hero-pattern-dark.svg')]">
+<body class="bg-[url('../components/hero-pattern.svg')]">
 
     <main class="max-w-4xl flex items-center mx-auto md:min-h-screen p-4 md:p-8">
         <div

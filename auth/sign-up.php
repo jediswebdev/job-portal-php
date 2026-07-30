@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
-<body class="bg-[url('../components/hero-pattern-dark.svg')]">
+<body class="bg-[url('../components/hero-pattern.svg')]">
 
     <main class="max-w-4xl flex items-center mx-auto md:min-h-screen p-4 md:p-8">
         <div
@@ -51,6 +51,16 @@ if (isset($_POST['submit'])) {
                     <a href="/job-portal/index.php"
                         class="mr-5 rounded-xl bg-indigo-700 text-md font-bold text-white px-5 py-2">Home</a>
                     <h1 class="text-slate-900 text-2xl font-bold my-auto">Create an account</h1>
+                </div>
+
+                <div class="mt-4 text-center text-black">
+                    <?php if ($response): ?>
+                        <?php if (is_array($response) && isset($response['msg']) && $response['msg'] === "success"): ?>
+                            <p class="text-center text-green-600 font-medium">Your registration was a success</p>
+                        <?php elseif (is_string($response)): ?>
+                            <p class="text-red-500 font-medium"><?php echo $response; ?></p>
+                        <?php endif; ?>
+                    <?php endif; ?>
                 </div>
 
                 <form class="space-y-6 mb-4" method="POST" action="">
@@ -160,16 +170,6 @@ if (isset($_POST['submit'])) {
                         class="text-blue-700 hover:underline ml-1 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
                         Login here
                     </a>
-                </div>
-
-                <div class="mt-4 text-center text-black">
-                    <?php if ($response): ?>
-                        <?php if (is_array($response) && isset($response['msg']) && $response['msg'] === "success"): ?>
-                            <p class="text-center text-green-600 font-medium">Your registration was a success</p>
-                        <?php elseif (is_string($response)): ?>
-                            <p class="text-red-500 font-medium"><?php echo $response; ?></p>
-                        <?php endif; ?>
-                    <?php endif; ?>
                 </div>
             </div>
         </div>
