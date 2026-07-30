@@ -1,6 +1,4 @@
 <?php
-
-
 class Database
 {
     private $serverName;
@@ -18,12 +16,11 @@ class Database
         $this->dbName = $dbName;
     }
 
-    private function connectToDB($useDb = true)
+    public function connectToDB($useDb = true)
     {
         try {
             $dsn = "mysql:host={$this->serverName}";
 
-            // Only attach dbname if we want to use it AND it isn't empty
             if ($useDb && !empty($this->dbName)) {
                 $dsn .= ";dbname={$this->dbName}";
             }
@@ -35,8 +32,7 @@ class Database
             return $conn;
 
         } catch (PDOException $e) {
-            $error = 'Connection failed: ' . $e->getMessage();
-            array_push($this->errors, $error);
+            $this->errors[] = 'Connection failed: ' . $e->getMessage();
             return false;
         }
     }
@@ -44,18 +40,13 @@ class Database
     public function createDatabase($database_name)
     {
         try {
-            // Connect without selecting a DB
             $connection = $this->connectToDB(false);
             if (!$connection)
-                return false; // Prevent calling exec() on false
+                return false;
 
             $sql = "CREATE DATABASE IF NOT EXISTS `$database_name`";
             $connection->exec($sql);
-
-            // Store the database name for future queries
             $this->dbName = $database_name;
-
-            echo 'DB successfully created<br>';
 
             return [
                 'completed' => true,
@@ -63,10 +54,8 @@ class Database
                 'message' => 'Database created Successfully!',
                 'errors' => $this->errors ?? false
             ];
-
         } catch (PDOException $e) {
-            $error = 'An error occurred while creating database: ' . $e->getMessage();
-            array_push($this->errors, $error);
+            $this->errors[] = 'An error occurred while creating database: ' . $e->getMessage();
             return false;
         }
     }
@@ -76,12 +65,9 @@ class Database
         try {
             $connection = $this->connectToDB();
             if (!$connection)
-                return false; // Fixed: Safety check
+                return false;
 
-            $sql = $sql_string;
-            $connection->exec($sql);
-
-            echo 'Table Created Successfully<br>';
+            $connection->exec($sql_string);
 
             return [
                 'completed' => true,
@@ -89,25 +75,22 @@ class Database
                 'message' => 'Table created Successfully!',
                 'errors' => $this->errors ?? false
             ];
-
         } catch (PDOException $e) {
-            $error = 'An error occurred while creating table: ' . $e->getMessage();
-            array_push($this->errors, $error);
+            $this->errors[] = 'An error occurred while creating table: ' . $e->getMessage();
             return false;
         }
     }
 
-    public function insertToTable($sql_string)
+    // UPDATED: Now accepts a $params array and uses prepare()/execute()
+    public function insertToTable($sql_string, $params = [])
     {
         try {
             $connection = $this->connectToDB();
             if (!$connection)
-                return false; // Fixed: Safety check
+                return false;
 
-            $sql = $sql_string;
-            $connection->exec($sql);
-
-            echo 'Data inserted Successfully!<br>';
+            $stmt = $connection->prepare($sql_string);
+            $stmt->execute($params);
 
             return [
                 'completed' => true,
@@ -116,24 +99,22 @@ class Database
                 'errors' => $this->errors ?? false
             ];
         } catch (PDOException $e) {
-            $error = 'An error occurred while inserting data: ' . $e->getMessage();
-            array_push($this->errors, $error);
+            $this->errors[] = 'An error occurred while inserting data: ' . $e->getMessage();
             return false;
         }
     }
 
-    public function insertAndGetID($sql_string)
+    // UPDATED: Now accepts a $params array
+    public function insertAndGetID($sql_string, $params = [])
     {
         try {
             $connection = $this->connectToDB();
             if (!$connection)
-                return false; // Fixed: Safety check
+                return false;
 
-            $sql = $sql_string;
-            $connection->exec($sql);
-
+            $stmt = $connection->prepare($sql_string);
+            $stmt->execute($params);
             $last_id = $connection->lastInsertId();
-            echo 'Data inserted Successfully!<br>';
 
             return [
                 'completed' => true,
@@ -142,26 +123,22 @@ class Database
                 'errors' => $this->errors ?? false
             ];
         } catch (PDOException $e) {
-            $error = 'An error occurred while inserting data: ' . $e->getMessage();
-            array_push($this->errors, $error);
+            $this->errors[] = 'An error occurred while inserting data: ' . $e->getMessage();
             return false;
         }
     }
 
-    public function getAllDataFromTable($sql_string)
+    // UPDATED: Now accepts a $params array
+    public function getAllDataFromTable($sql_string, $params = [])
     {
         try {
             $connection = $this->connectToDB();
             if (!$connection)
-                return false; // Fixed: Safety check
+                return false;
 
-            $sql = $sql_string;
-            $statement = $connection->query($sql);
-
-            // Fixed: Actually fetch the data as an associative array instead of returning the statement object
-            $result = $statement->fetchAll(PDO::FETCH_OBJ);
-
-            echo 'Fetched Data Successfully!<br>';
+            $stmt = $connection->prepare($sql_string);
+            $stmt->execute($params);
+            $result = $stmt->fetchAll(PDO::FETCH_OBJ);
 
             return [
                 'completed' => true,
@@ -170,22 +147,21 @@ class Database
                 'errors' => $this->errors ?? false
             ];
         } catch (PDOException $e) {
-            $error = 'An error occurred while multiple fetching data: ' . $e->getMessage();
-            array_push($this->errors, $error);
+            $this->errors[] = 'An error occurred while multiple fetching data: ' . $e->getMessage();
             return false;
         }
     }
 
-    public function getOneDataFromTable($sql_string){
+    // UPDATED: Now accepts a $params array
+    public function getOneDataFromTable($sql_string, $params = [])
+    {
         try {
             $connection = $this->connectToDB();
-            if(!$connection) return false;
+            if (!$connection)
+                return false;
 
-            $sql = $sql_string;
-            $stmt = $connection->prepare($sql);
-
-            $stmt->execute();
-
+            $stmt = $connection->prepare($sql_string);
+            $stmt->execute($params);
             $response = $stmt->fetch(PDO::FETCH_OBJ);
 
             return [
@@ -194,16 +170,12 @@ class Database
                 'message' => "Specific data fetched successfully!",
                 'errors' => $this->errors ?? false
             ];
-
         } catch (PDOException $e) {
-            $error = 'An error occurred while fetching specific data: ' . $e->getMessage();
-            array_push($this->errors, $error);
+            $this->errors[] = 'An error occurred while fetching specific data: ' . $e->getMessage();
             return false;
         }
-        
     }
 }
 
 $db = new Database();
-
 ?>

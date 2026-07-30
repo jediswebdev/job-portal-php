@@ -2,14 +2,14 @@
 
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 
-    <a href="<?php echo "/job-portal/index.php" ?>" class="flex items-center space-x-3 rtl:space-x-reverse">
-      <img src="/job-portal/components/favicon.jpg" class="h-10 rounded rounded-sm" alt="Jkyber" />
+    <a href="<?php echo $_SERVER['PHP_SELF'] ?>" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <img src="./components/favicon.jpg" class="h-10 rounded rounded-sm" alt="Jkyber" />
       <span class="self-center text-xl text-heading font-semibold whitespace-nowrap">JKyber Dev Jobs</span>
     </a>
 
     <div class="inline-flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
 
-      <a href="/job-portal/auth/sign-up.php"
+      <a href="./auth/sign-up.php"
         class="text-white bg-blue-950 hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded rounded-xl text-sm px-3 py-2 focus:outline-none cursor-pointer">Get
         started</a>
 

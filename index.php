@@ -15,7 +15,7 @@
 
     <!-- Showcase -->
     <section
-        class="relative bg-indigo-400 p-20 md:p-30 bg-[url('/job-portal/components/hero-pattern-dark.svg')]">
+        class="relative bg-indigo-400 p-20 md:p-30 bg-[url('./components/hero-pattern-dark.svg')]">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 z-10 relative">
             <div class="w-auto inline-flex items-center p-1 pe-2 mb-4 text-sm text-fg-brand-strong rounded-full bg-indigo-600 border border-brand-subtle mb-15"
                 role="alert">
@@ -36,7 +36,7 @@
                 technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
 
 
-            <form action="./lib/search.php" class="max-w-md mx-auto">
+            <form action="/job-portal/auth/sign-up.php" class="max-w-md mx-auto">
                 <label for="search" class="block mb-2.5 text-sm font-medium text-heading sr-only ">Search</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -53,6 +53,7 @@
                         class="absolute end-1.5 bottom-1.5 text-white bg-blue-700 hover:bg-blue-800 box-border border border-transparent focus:ring-4 focus:ring-blue-medium shadow-2xl font-medium leading-5 rounded text-xs px-3 py-1.5 focus:outline-none cursor-pointer">Search</button>
                 </div>
             </form>
+
         </div>
         <div
             class="bg-gradient-to-b from-blue-50 to-transparent dark:from-blue-900 w-full h-full absolute top-0 left-0 z-0">
@@ -62,13 +63,13 @@
 
     <!-- Card Section -->
     <div
-        class="bg-white w-full text-black p-5 mt-6 my-auto flex md:flex-row flex-col gap-5 container mx-auto justify-center ">
+        class="bg-white w-full text-black p-5 mt-6 my-auto flex md:flex-row flex-col gap-5 container mx-auto justify-center">
 
-        <div class="bg-gray-100 block p-6 border border-default rounded rounded-xl shadow shadow-2xl">
+        <div class="bg-gray-100 w-full block p-6 border border-default rounded rounded-xl shadow shadow-2xl">
             <h5 class="mb-3 text-2xl font-semibold tracking-tight text-heading leading-8">For Developers</h5>
             <p class="text-body mb-4">Browse our job listings and start your career today. </p>
 
-            <a href="/job-portal/auth/sign-up.php" 
+            <a href="./auth/sign-up.php" 
                 class="inline-flex items-center text-white bg-indigo-500 box-border border border-transparent hover:bg-indigo-700 shadow-xs font-medium leading-5 rounded-sm text-sm px-4 py-2.5 cursor-pointer">
                 Browse Jobs
                 <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -79,10 +80,10 @@
             </a>
         </div>
 
-        <div class="bg-indigo-100 block p-6 border border-default rounded rounded-xl shadow shadow-2xl">
+        <div class="w-full bg-indigo-100 block p-6 border border-default rounded rounded-xl shadow shadow-2xl">
             <h5 class="mb-3 text-2xl font-semibold tracking-tight text-heading leading-8">For Employers</h5>
             <p class="text-body mb-4">List your job to find the perfect developer for the role </p>
-            <a href="/job-portal/auth/sign-up.php" 
+            <a href="./auth/sign-up.php" 
                 class="inline-flex items-center text-white bg-indigo-500 box-border border border-transparent hover:bg-indigo-700 shadow-xs font-medium leading-5 rounded-sm text-sm px-4 py-2.5 cursor-pointer">
                 Create your listing
                 <svg class="w-4 h-4 ms-1.5 rtl:rotate-180 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"

@@ -1,8 +1,8 @@
 <footer class="bg-indigo-700 rounded-base shadow-xl">
     <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div class="sm:flex sm:items-center sm:justify-between">
-            <a href="/job-portal" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-                <img src="/job-portal/components/favicon.jpg" class="h-7 rounded rounded-md" alt="Logo" />
+            <a href="<?php echo $_SERVER['PHP_SELF']; ?>" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+                <img src="./components/favicon.jpg" class="h-7 rounded rounded-md" alt="Logo" />
                 <span class="text-heading self-center text-2xl font-semibold whitespace-nowrap">JKyber Dev Jobs</span>
             </a>
             <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-body sm:mb-0">
