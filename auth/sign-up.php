@@ -1,6 +1,12 @@
 <?php
 require __DIR__ . '/auth_functions.php';
 
+// Redirect already logged-in users straight to dashboard
+if (isset($_SESSION['user_id'])) {
+    header("Location: ../dashboard/index.php");
+    exit();
+}
+
 $response = null;
 
 if (isset($_POST['submit'])) {
