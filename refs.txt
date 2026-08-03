@@ -1,0 +1,33 @@
+<?php
+
+function uploadProfileImg() {
+
+    if ( !empty( $_FILES[ 'profile_img' ] ) ) {
+
+        $name = $_FILES[ 'profile_img' ][ 'name' ];
+        $targetDir = '../uploads/profile-images/' . date( 'Y-m-d' ). '_' . rand( 10000000, 20000000 ) . '_' . $name;
+        $allowedexts = [ 'png', 'jpg', 'jpeg' ];
+
+        $fileext = explode( '.', $name );
+        $fileext = strtolower( end( $fileext ) );
+
+        if ( in_array( $fileext, $allowedexts ) ) {
+
+            if ( $_FILES[ 'uploader' ][ 'size' ] <= 1000000 ) {
+
+                move_uploaded_file( $_FILES[ 'profile_img' ][ 'tmp_name' ], $targetDir );
+                return [
+                    "completed" => true,
+                    "path" => $targetDir,
+                ];
+
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+}
+

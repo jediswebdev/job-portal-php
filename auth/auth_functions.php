@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 require '../lib/database.php';
+require '../lib/uploader.php';
 
 class AuthService
 {
@@ -17,15 +18,41 @@ class AuthService
     {
         $this->db = $dbconn;
     }
+    private function uploadProfileImg()
+    {
+
+        if (!empty($_FILES['profile_img'])) {
+
+            $name = $_FILES['profile_img']['name'];
+            $targetDir = '../uploads/profile-images/' . date('Y-m-d') . '_' . rand(10000000, 20000000) . '_' . $name;
+            $allowedexts = ['png', 'jpg', 'jpeg'];
+
+            $fileext = explode('.', $name);
+            $fileext = strtolower(end($fileext));
+
+            if (in_array($fileext, $allowedexts)) {
+
+                if ($_FILES['profile_img']['size'] <= 1000000) {
+
+                    move_uploaded_file($_FILES['profile_img']['tmp_name'], $targetDir);
+                    return [
+                        "completed" => true,
+                        "path" => $targetDir,
+                    ];
+
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+
+    }
 
     public function registerUser($name, $email, $role, $password, $confirm_password)
     {
         $args = func_get_args();
-
-        // trim values
-        $args = array_map(function ($value) {
-            return trim($value);
-        }, $args);
 
         // check for missing fields
         foreach ($args as $value) {
@@ -34,14 +61,8 @@ class AuthService
             }
         }
 
-        // check for scripts
-        foreach ($args as $value) {
-            if (preg_match("/([<|>])/", $value)) {
-                return "<> characters are not allowed";
-            }
-        }
-
-        $response = $this->db->getOneDataFromTable("SELECT email FROM users WHERE email = ?", [$email]);
+        $uploadImg =
+            $response = $this->db->getOneDataFromTable("SELECT email FROM users WHERE email = ?", [$email]);
 
 
         if ($response === false) {
@@ -62,12 +83,15 @@ class AuthService
             return "Passwords do not match";
         }
 
+        // Upload Profile Img
+        $fileUploaded = $this->uploadProfileImg();
+
         $randId = rand(10000000, 30000000);
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         $res = $this->db->insertToTable(
-            "INSERT INTO users (user_id, user_name, email, password_hash, user_type) VALUES (?, ?, ?, ?, ?)",
-            [$randId, $name, $email, $hashed_password, $role]
+            "INSERT INTO users (user_id, user_name, email, password_hash, user_type, profile_img_url) VALUES (?, ?, ?, ?, ?, ?)",
+            [$randId, $name, $email, $hashed_password, $role, $fileUploaded['path'] ?? ""]
         );
 
         if (!$res || !$res['completed']) {
@@ -80,7 +104,8 @@ class AuthService
         }
     }
 
-    public function loginUser($email, $password) {
+    public function loginUser($email, $password)
+    {
         // 1. Basic validation
         if (empty($email) || empty($password)) {
             return "Please fill in both email and password.";
@@ -94,12 +119,13 @@ class AuthService
 
             // 3. Check if user exists and password is correct
             if ($user && password_verify($password, $user['password_hash'])) {
-                
+
                 // 4. Store user details in session
-                $_SESSION['user_id']   = $user['user_id'];
+                $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['user_name'] = $user['user_name'];
-                $_SESSION['user_email']= $user['email'];
-                $_SESSION['role']      = $user['role'] ?? 'developer'; // Optional role check
+                $_SESSION['user_email'] = $user['email'];
+                $_SESSION['role'] = $user['role'] ?? 'developer'; // Optional role check
+                $_SESSION['profile_img_url'] = $user['profile_img_url'];
 
                 // 5. Redirect on success
                 header("Location: ../dashboard/index.php");
@@ -122,6 +148,8 @@ class AuthService
     public function deleteAccount()
     {
     }
+
+
 }
 
 $authService = new AuthService($db);

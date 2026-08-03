@@ -8,10 +8,16 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// 2. Safely retrieve session data
+// Retrieve session data
 $userName = $_SESSION['user_name'] ?? 'User';
 $userRole = $_SESSION['role'] ?? 'developer';
+$userProfileImg = $_SESSION['profile_img_url'] ?? "No Profile Image"
 ?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,6 +45,9 @@ $userRole = $_SESSION['role'] ?? 'developer';
             <p class="text-gray-600 mt-2">
                 Account Type: <span class="capitalize font-semibold text-indigo-600"><?php echo htmlspecialchars($userRole); ?></span>
             </p>
+            <div class="mt-5">
+                <img src="<?php echo $userProfileImg; ?>" alt="No Image">
+            </div>
         </div>
     </main>
 

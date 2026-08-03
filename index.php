@@ -15,7 +15,7 @@
 
     <!-- Showcase -->
     <section
-        class="relative bg-indigo-400 p-20 md:p-30 bg-[url('./components/hero-pattern-dark.svg')]">
+        class="relative bg-indigo-600 p-20 md:p-30 bg-[url('./components/hero-pattern-dark.svg')]">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 z-10 relative">
             <div class="w-auto inline-flex items-center p-1 pe-2 mb-4 text-sm text-fg-brand-strong rounded-full bg-indigo-600 border border-brand-subtle mb-15"
                 role="alert">

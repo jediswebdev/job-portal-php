@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
     $confirm_password = $_POST['confirm_password'];
 
     // Pass $role to your service function
-    $response = $authService->registerUser($name, $email, $role, $password, $confirm_password);
+    $response = $authService->registerUser($name, $email, $role, $password, $confirm_password,);
 }
 ?>
 <!DOCTYPE html>
@@ -63,7 +63,7 @@ if (isset($_POST['submit'])) {
                     <?php endif; ?>
                 </div>
 
-                <form class="space-y-6 mb-4" method="POST" action="">
+                <form class="space-y-6 mb-4" method="POST" action="" enctype="multipart/form-data">
                     <div>
                         <label for="name" class="mb-2 text-slate-900 font-medium text-sm inline-block">Name</label>
                         <input type="text" id="name" name="user_name" placeholder="Enter your name" required
@@ -87,7 +87,18 @@ if (isset($_POST['submit'])) {
                             required
                             class="px-3 py-2.5 text-sm text-slate-900 rounded-md bg-white w-full outline-1 -outline-offset-1 outline-slate-300 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600" />
                     </div>
+                    <!-- File upload -->
+                    <div class="max-w-sm mx-auto mt-6">
+                        <label for="upload" class="text-slate-900 text-sm font-medium mb-2 block">
+                            Upload Profile Photo
+                        </label>
 
+                        <input id="upload" type="file"
+                            class="w-full text-slate-600 font-medium text-sm border border-slate-200 rounded-md cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 file:cursor-pointer file:border-0 file:py-2 file:px-3 file:mr-4 file:bg-gray-100 hover:file:bg-gray-200 file:text-slate-500" name="profile_img" />
+
+                        <p class="text-xs text-slate-500 mt-2">PNG, JPG, SVG are Allowed.</p>
+                    </div>
+                    
                     <div>
                         <label for="role" class="mb-2 text-slate-900 font-medium text-sm inline-block">I want to sign up
                             as</label>

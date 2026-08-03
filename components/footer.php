@@ -21,7 +21,7 @@
             </ul>
         </div>
         <hr class="my-6 border-default sm:mx-auto lg:my-8" />
-        <span class="block text-sm text-body sm:text-center">© 2026 <a href="/job-portal/index.php" class="hover:underline">JKyber Digital Solutions™</a>. All Rights Reserved.</span>
+        <span class="block text-sm text-body sm:text-center">© <?php echo date("Y"); ?> <a href="https://app-jediswebdev.onrender.com" class="hover:underline">JKyber Digital Solutions™</a>. All Rights Reserved.</span>
     </div>
 </footer>
 

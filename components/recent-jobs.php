@@ -1,7 +1,7 @@
 <?php require_once './lib/database.php'; ?>
 <?php
 
-$latestJobs = $db->getAllDataFromTable("SELECT * FROM jobs LIMIT 3");
+$latestJobs = $db->getAllDataFromTable("SELECT * FROM recent_jobs LIMIT 3");
 $jobs = $latestJobs['data'];
 
 
@@ -10,7 +10,7 @@ $jobs = $latestJobs['data'];
 
 
 <!-- Recent Jobs section -->
-<div class="bg-[url('./components/hero-pattern.svg')] text-black md:p-25 p-19 mt-4">
+<div class="bg-[url('./components/hero-pattern.svg')] bg-indigo-50 text-black md:p-25 p-19 mt-4">
 
     <h1 class="text-center font-bold text-black text-4xl mb-15">Recent Jobs</h1>
 
