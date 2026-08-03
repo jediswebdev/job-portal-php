@@ -57,3 +57,50 @@ function uploadProfileImg() {
             </div>
         </div>
     </main>
+
+
+
+
+
+    <!-- Document Verification Upload Form -->
+                    <div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-6">Verify Your Identity</h3>
+                        <p class="text-sm text-gray-600 mb-4">Please upload a clear image of your government-issued ID
+                            to complete verification.</p>
+                        <form action="#" method="POST" class="space-y-6">
+                            <div>
+                                <label for="doc-type" class="block text-sm font-medium text-gray-700">Document
+                                    Type</label>
+                                <select id="doc-type" name="doc-type" required
+                                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md">
+                                    <option>Passport</option>
+                                    <option>Driver's License</option>
+                                    <option>National ID Card</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="doc-file" class="block text-sm font-medium text-gray-700">Upload
+                                    Document</label>
+                                <input type="file" name="doc-file" id="doc-file" required
+                                    class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100 cursor-pointer">
+                                <p class="mt-1 text-xs text-gray-500">Ensure the document is clear and all details are
+                                    visible. PDF, JPG, PNG.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex items-center h-5">
+                                    <input id="doc-consent" name="doc-consent" type="checkbox" required
+                                        class="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded">
+                                </div>
+                                <div class="ml-3 text-sm">
+                                    <label for="doc-consent" class="font-medium text-gray-700">I confirm that this
+                                        document is valid and belongs to me.</label>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit"
+                                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                    Upload for Verification
+                                </button>
+                            </div>
+                        </form>
+                    </div>

@@ -105,12 +105,14 @@ $profileImgSrc = !empty($userProfileImg) && $userProfileImg !== "No Profile Imag
                             class="block py-2 px-3 text-indigo-100 rounded hover:bg-indigo-600 md:hover:bg-transparent md:hover:text-white md:p-0">Jobs</a>
                     </li>
                     <li>
-                        <a href="#"
-                            class="block py-2 px-3 text-indigo-100 rounded hover:bg-indigo-600 md:hover:bg-transparent md:hover:text-white md:p-0">Mentoring</a>
+                        <a href="applications.php"
+                            class="block py-2 px-3 text-indigo-100 rounded hover:bg-indigo-600 md:hover:bg-transparent md:hover:text-white md:p-0">My
+                            Applications</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="block py-2 px-3 text-indigo-100 rounded hover:bg-indigo-600 md:hover:bg-transparent md:hover:text-white md:p-0">Events</a>
+                            class="block py-2 px-3 text-indigo-100 rounded hover:bg-indigo-600 md:hover:bg-transparent md:hover:text-white md:p-0">Dev
+                            Events</a>
                     </li>
                     <li>
                         <a href="#"
@@ -120,6 +122,10 @@ $profileImgSrc = !empty($userProfileImg) && $userProfileImg !== "No Profile Imag
             </div>
         </div>
     </nav>
+
+    <!-- Job sections -->
+
+    
 
     <!-- Javascript functionality -->
     <script>

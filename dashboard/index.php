@@ -17,8 +17,9 @@ if ($userRole == "developer") {
     exit();
 }
 
-if ($userRole == "company") {
+if ($userRole == "employer") {
     header("Location: ./comp/index.php");
     exit();
 }
+
 ?>
