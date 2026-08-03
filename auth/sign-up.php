@@ -1,5 +1,5 @@
 <?php
-require 'auth_functions.php';
+require __DIR__ . '/auth_functions.php';
 
 $response = null;
 
@@ -48,7 +48,7 @@ if (isset($_POST['submit'])) {
             <div class="w-full py-6 px-6 max-w-lg mx-auto md:col-span-2 md:px-14">
 
                 <div class="mb-10 flex flex-row gap-3">
-                    <a href="/job-portal/index.php"
+                    <a href="../index.php"
                         class="mr-5 rounded-xl bg-indigo-700 text-md font-bold text-white px-5 py-2">Home</a>
                     <h1 class="text-slate-900 text-2xl font-bold my-auto">Create an account</h1>
                 </div>

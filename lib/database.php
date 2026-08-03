@@ -10,10 +10,10 @@ class Database
 
     public function __construct($dbName = 'job_portal_db')
     {
-        $this->serverName = 'localhost';
-        $this->username = 'root';
-        $this->password = '';
-        $this->dbName = $dbName;
+        $this->serverName = getenv('DB_HOST') ?: 'localhost';
+        $this->username = getenv('DB_USERNAME') ?: 'root';
+        $this->password = getenv('DB_PASSWORD') ?: '';
+        $this->dbName = getenv('DB_NAME') ?: $dbName;
     }
 
     public function connectToDB($useDb = true)
@@ -25,9 +25,10 @@ class Database
                 $dsn .= ";dbname={$this->dbName}";
             }
 
-            $conn = new PDO($dsn, $this->username, $this->password);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $conn->setAttribute(PDO::FETCH_DEFAULT, PDO::FETCH_OBJ);
+            $conn = new PDO($dsn, $this->username, $this->password, [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+            ]);
 
             return $conn;
 

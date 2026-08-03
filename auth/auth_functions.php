@@ -3,8 +3,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require '../lib/database.php';
-require '../lib/uploader.php';
+require __DIR__ . '/../lib/database.php';
 
 class AuthService
 {
@@ -112,8 +111,13 @@ class AuthService
         }
 
         try {
+            $connection = $this->db->connectToDB();
+            if (!$connection) {
+                return "Database connection is unavailable. Please try again later.";
+            }
+
             // 2. Fetch user from database
-            $stmt = $this->db->connectToDB()->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+            $stmt = $connection->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
             $stmt->execute([':email' => $email]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -124,12 +128,12 @@ class AuthService
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['user_name'] = $user['user_name'];
                 $_SESSION['user_email'] = $user['email'];
-                $_SESSION['role'] = $user['role'] ?? 'developer'; // Optional role check
+                $_SESSION['role'] = $user['user_type'] ?? $user['role'] ?? 'developer';
                 $_SESSION['profile_img_url'] = $user['profile_img_url'];
 
                 // 5. Redirect on success
                 header("Location: ../dashboard/index.php");
-                exit(); // Always call exit() after header redirection
+                exit();
             }
 
             return "Invalid email or password.";
